@@ -1,0 +1,27 @@
+.history {
+    &-panel {
+        border-bottom: 1px solid $base-100;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        font-size: $fs-16;
+        &-left {
+            padding-right: 20px;
+        }
+        &-right {
+            width: 120px;
+            text-align: right;
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .history {
+        &-panel {
+            font-size: $fs-14;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+    }
+}

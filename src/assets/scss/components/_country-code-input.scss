@@ -1,0 +1,19 @@
+.iti{
+    &__country {
+        font-size: $fs-16;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &-list {
+            box-shadow: $box-shadow;
+            border-radius: $border-radius;
+            border: 0;
+            width: 236px;
+            margin-top: 6px;
+            border: 1px solid rgba($base-color, 0.2);
+        }
+    }
+    &__divider {
+        border-bottom-color: rgba($base-color, 0.1);
+    }
+}

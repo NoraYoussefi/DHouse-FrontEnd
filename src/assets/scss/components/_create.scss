@@ -1,0 +1,12 @@
+.create {
+    &-img {
+        width: 60px;
+    }
+}
+@include media-breakpoint-up(sm) {
+    .create {
+        &-img {
+            width: auto;
+        }
+    }
+}

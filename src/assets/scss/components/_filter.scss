@@ -1,0 +1,55 @@
+.filter {
+    &-box {
+        &-filter {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        &-sort-text {
+            font-size: 14px;
+            font-weight: $fw-bold;
+        }
+    }
+    &-button {
+        &-group {
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: -4px;
+            .button {
+                border: 1px solid rgba(128, 137, 150, 0.2);
+                font-weight: $fw-semibold;
+                font-size: $fs-16;
+                padding: 2px 10px;
+                @include border-radius(6px);
+                margin: 4px;
+                background-color: transparent;
+                color: $headding-color;
+                &.is-checked {
+                    background-color: $headding-color;
+                    color: $white;
+                }
+            }
+        }
+    }
+    &-btn {
+        border: 1px solid rgba(128, 137, 150, 0.2);
+        font-weight: $fw-semibold;
+        font-size: $fs-16;
+        padding: 6px 20px;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .filter {
+        &-button {
+            &-group {
+                margin: -6px;
+                .button {
+                    padding: 6px 20px;
+                    margin: 6px;
+                }
+            }
+        }
+    }
+}

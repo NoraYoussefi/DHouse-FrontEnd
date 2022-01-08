@@ -1,0 +1,89 @@
+.swiper {
+    &-carousel {
+        margin: -15px;
+        .swiper-slide {
+            padding: 15px;
+        }
+    }
+    &-horizontal > {
+        .swiper-pagination-bullets {
+            bottom: 0;
+        }
+    }
+    &-pagination {
+        &-space {
+            .swiper-wrapper {
+                padding-bottom: 36px;
+            }
+        }
+        &-bullet {
+            @include border-radius(2px);
+            width: 20px;
+            height: 4px;
+            &-active {
+              background: $primary;  
+            }
+        }
+    }
+    &-button {
+        &-prev,
+        &-next {
+            width: 40px;
+            height: 40px;
+            @include border-radius(50%);
+            background-color: $white;
+            @include box-shadow(0 2px 6px rgba(0,0,0, 0.1));
+            @include transition(0.3s);
+            top: auto;
+            &:after {
+                font-size: $fs-11;
+                color: $headding-color;
+                font-family: $ni-font;
+            }
+            &:hover {
+                background-color: $primary;
+                &:after {
+                    color: $white;
+                }
+            }
+        }
+        &-prev {
+            &::after {
+                content: "\e9cc";
+            }
+        }
+        &-next {
+            &::after {
+                content: "\e9d3";
+            }
+        }
+        &-s1 {
+            .swiper-button-prev, 
+            .swiper-button-next {
+                bottom: 110px;
+                width: 32px;
+                height: 32px;
+            }
+            .swiper-button-prev {
+                right: 68px;
+                left: auto;
+            }
+            .swiper-button-next {
+                right: 30px;
+                left: auto;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .swiper-button-s1 .swiper-button-next, 
+    .swiper-button-s1 .swiper-button-prev {
+        bottom: 36px;
+        width: 40px;
+        height: 40px;
+    }
+    .swiper-button-s1 .swiper-button-prev {
+        right: 80px;
+    }
+}

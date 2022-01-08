@@ -1,0 +1,41 @@
+.cta {
+    &-title {
+        font-size: $fs-7;
+    }
+    &-filter-title {
+        font-size: $fs-8;
+        font-weight: $fw-bold;
+        color: $headding-color;
+    }
+}
+@include media-breakpoint-up(md){
+    .cta {
+        &-box {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        &-title {
+            font-size: $fs-5;
+        }
+        &-text {
+            font-size: $fs-12;
+        }
+    }
+}
+
+@include media-breakpoint-up(lg){
+    .cta {
+        &-title {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        &-text {
+            max-width: 630px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: $fs-12;
+        }
+    }
+}

@@ -1,0 +1,124 @@
+
+<header class="header-section has-header-main">
+  <app-navbar></app-navbar>
+</header>
+    <section class="register-section section-space-b pt-4 pt-md-5 mt-md-3">
+      <div class="container">
+          <div class="row align-items-center justify-content-center">
+              <div class="col-lg-6 mb-lg-0 d-none d-lg-block">
+                  <img src="assets/images/thumb/remote-2.png" alt="" class="img-fluid">
+              </div><!-- end col-lg-6 -->
+              <div class="col-lg-6 col-md-9">
+                  <div class="section-head-sm">
+                      <h2 class="mb-3">Sign Up to <span class="text-primary">EnftyMart!</span></h2>
+                      <p>Fill up the below fields to create an account</p>
+                  </div>
+                  <form
+                    *ngIf="!isSuccessful"
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    novalidate
+                  >
+
+                      <div class="form-floating mb-4">
+                          <input
+                            class="form-control"
+                            id="userName"
+                            placeholder="Username"
+                            type="text"
+                            name="username"
+                            [(ngModel)]="form.username"
+                            required
+                            minlength="3"
+                            maxlength="20"
+                            #username="ngModel"
+                          >
+
+
+                          <div class="alert-danger" *ngIf="username.errors && f.submitted">
+                            <div *ngIf="username.errors['required']">Username is required</div>
+                            <div *ngIf="username.errors['minlength']">
+                              Username must be at least 3 characters
+                            </div>
+                            <div *ngIf="username.errors['maxlength']">
+                              Username must be at most 20 characters
+                            </div>
+                          </div>
+                          <label for="userName">Username</label>
+                      </div><!-- end form-floating -->
+
+
+
+                      <div class="form-floating mb-4">
+                          <input
+                            id="emailAddress"
+                            placeholder="name@example.com"
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            [(ngModel)]="form.email"
+                            required
+                            email
+                            #email="ngModel"
+                          >
+
+                          <div class="alert-danger" *ngIf="email.errors && f.submitted">
+                            <div *ngIf="email.errors['required']">Email is required</div>
+                            <div *ngIf="email.errors['email']">
+                              Email must be a valid email address
+                            </div>
+                          </div>
+
+                          <label for="email">Email address</label>
+                      </div><!-- end form-floating -->
+
+
+                      <div class="form-floating mb-4">
+                          <input
+                            class="form-control password"
+                            id="password"
+                            placeholder="Password"
+                            type="password"
+                            name="password"
+                            [(ngModel)]="form.password"
+                            required
+                            minlength="6"
+                            #password="ngModel"
+                          >
+
+                          <div class="alert-danger" *ngIf="password.errors && f.submitted">
+                            <div *ngIf="password.errors['required']">Password is required</div>
+                            <div *ngIf="password.errors['minlength']">
+                              Password must be at least 6 characters
+                            </div>
+                          </div>
+
+
+                          <label for="password">Password</label>
+                          <a href="password" class="password-toggle" title="Toggle show/hide pasword">
+                              <em class="password-shown ni ni-eye-off"></em>
+                              <em class="password-hidden ni ni-eye"></em>
+                          </a>
+                      </div><!-- end form-floating -->
+
+                      <p class="mb-4 form-text">By signing up, you agree to our Terms and conditions and Privacy Policy</p>
+
+                      <button class="btn btn-primary w-100" type="submit">Create an Account</button>
+
+                      <span class="d-block my-4">— or sign up with —</span>
+
+                      <ul class="btns-group d-flex">
+                          <li class="flex-grow-1"><a href="#" class="btn d-block bg-red-100 text-red g-btn"><em class="ni ni-google"></em> Google</a></li>
+                          <li class="flex-grow-1"><a href="#" class="btn d-block bg-blue-100 text-blue f-btn"><em class="ni ni-facebook-f"></em> Facebook</a></li>
+                          <li class="flex-grow-1"><a href="#" class="btn d-block bg-cyan-100 text-cyan t-btn"><em class="ni ni-twitter"></em> Twitter</a></li>
+
+                        </ul>
+
+                        <p class="mt-3 form-text">Already have an account <a routerLink="/login" class="btn-link">Login</a></p>
+
+                      </form>
+              </div><!-- end col-lg-6 -->
+          </div><!-- end row -->
+      </div><!-- end container -->
+  </section><!-- end register-section -->
