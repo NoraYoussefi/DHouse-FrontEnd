@@ -1,4 +1,4 @@
-export const contractAddress="0x41a44DDA82a85319C53374142763c98D78633b72";//address to
+export const contractAddress="0x56cdBA4AD571e0902EF2DBb8d2E73eB74fe7B17f";//address to
 
 export const contractABI=[
   {
@@ -50,21 +50,6 @@ export const contractABI=[
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "sayHi",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "pure",
     "type": "function"
   },
   {

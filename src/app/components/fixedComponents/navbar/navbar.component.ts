@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/service/user/token.service';
 import { UserService } from 'src/app/service/user/user.service';
+import { Web3Service } from 'src/app/service/web3/web3.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
   signedIn!:boolean;
   user:any;
 
-  constructor(private tokenStorage:TokenService,private userService:UserService) {
+  constructor(private tokenStorage:TokenService,private userService:UserService,private web3:Web3Service) {
     this.signedIn=this.tokenStorage.signedIn()
     this.user=this.tokenStorage.getUser().user
    }
@@ -27,7 +28,8 @@ export class NavbarComponent implements OnInit {
   }
 
   connectWallet(){
-    console.log("Connecting to wallet")
+    console.log("Connecting to wallet");
+    this.web3.LoginWithMetaMask();
   }
 
 }

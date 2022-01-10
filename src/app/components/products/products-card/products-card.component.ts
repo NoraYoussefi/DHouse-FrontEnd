@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsCardComponent implements OnInit {
 
+  priceusd:any=132433;
+  priceeth:any=43;
+  username:any="ZeniconStudio";
+  title:any="One Tribe Black Edition";
+
   constructor() { }
 
   ngOnInit(): void {

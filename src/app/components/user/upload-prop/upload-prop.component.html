@@ -9,112 +9,190 @@
                   <a routerLink="" class="btn-link fw-semibold"><em class="ni ni-arrow-left"></em> Manage collectible type</a>
                   <h1 class="mt-2">Create single collectible</h1>
               </div><!-- end section-head -->
-              <form action="#" class="form-create mb-5 mb-lg-0">
-                  <div class="form-item mb-4">
-                      <h5 class="mb-3">Upload file</h5>
+
+              <form
+                name="propertyform"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate
+                class="form-create mb-5 mb-lg-0"
+              >
+
+
+                <div class="form-item mb-4">
+                      <h5 class="mb-3">Upload Images</h5>
                       <div class="file-upload-wrap">
-                          <p class="file-name mb-4" id="file-name">PNG, GIF, WEBP, MP4 or MP3. Max 100mb.</p>
-                          <input id="file-upload" class="file-upload-input" data-target="file-name" type="file" hidden>
-                          <label for="file-upload" class="input-label btn btn-primary">Choose File</label>
+                          <p class="file-name mb-4" id="file-name">PNG, JPG, JPEG . Max 100mb.</p>
+                          <input id="file-upload"  type="file"
+
+                            name="images"
+                            [(ngModel)]="propertyform.images"
+                            required
+                            #images="ngModel"
+
+                          >
                       </div>
+                      <span class="item-detail-text-meta text-danger mt-0" *ngIf="images.errors && f.submitted">
+                        Please upload at least one image
+                      </span>
                   </div><!-- end form-item -->
+
+
+
+                  <div class="form-item mb-2">
+                    <h5 class="mb-3">Upload Legal Documents</h5>
+                    <span class="item-detail-text-meta mt-0" >Make sure to add all legal documents to get your listing approved</span>
+                    <div class="file-upload-wrap">
+                        <p class="file-name mb-4" id="file-name">PDF. Max 100mb.</p>
+                        <input id="file-upload"  type="file"
+                            name="legaldocs"
+                            [(ngModel)]="propertyform.legaldocs"
+                            required
+                            #legaldocs="ngModel"
+                          >
+                    </div>
+                    <span class="item-detail-text-meta text-danger mt-0" *ngIf="legaldocs.errors && f.submitted">
+                      Please upload at least one Document
+                    </span>
+                </div><!-- end form-item -->
+
+
                   <div class="form-item mb-4">
                       <h5 class="mb-3">Select Method</h5>
 
                       <ul class="row g-3 nav nav-tabs nav-tabs-s2" id="myTab" role="tablist">
-                          <li class="nav-item col-6 " role="presentation">
-                              <button class="nav-link active" id="fixed-price-tab" data-bs-toggle="tab" data-bs-target="#fixed-price" type="button" role="tab" aria-controls="fixed-price" aria-selected="true">
+
+                        <li class="nav-item col-6 " role="presentation">
+                              <button (click)="setOne2One()" class="nav-link active" id="onetoone-tab" data-bs-toggle="tab" data-bs-target="#onetoone" type="button" role="tab" aria-controls="fixed-price" aria-selected="false">
                                   <em class="ni ni-tags nav-link-icon"></em>
                                   <span class="nav-link-title mt-1 d-block">One to One</span>
                               </button>
                           </li>
+
                           <li class="nav-item col-6 " role="presentation">
-                              <button class="nav-link" id="timed-auction-tab" data-bs-toggle="tab" data-bs-target="#timed-auction" type="button" role="tab" aria-controls="timed-auction" aria-selected="false">
+                              <button (click)="setOne2Many()" class="nav-link" id="onetomany-tab" data-bs-toggle="tab" data-bs-target="#onetomany" type="button" role="tab" aria-controls="timed-auction" aria-selected="true">
                                   <em class="ni ni-clock nav-link-icon"></em>
                                   <span class="nav-link-title mt-1 d-block">One to Many</span>
                               </button>
                           </li>
+
                       </ul>
 
+
                       <div class="tab-content my-4" id="myTabContent">
-                          <div class="tab-pane fade show active" id="fixed-price" role="tabpanel" aria-labelledby="fixed-price-tab">
-                              <div class="form-create-tab-wrap">
-                                  <label class="mb-2 form-label">Price</label>
-                                  <input type="text" class="form-control form-control-s1" placeholder="Enter a price for item">
-                              </div><!-- end form-create-tab-wrap -->
-                          </div><!-- end tab-pane -->
-                          <div class="tab-pane fade" id="timed-auction" role="tabpanel" aria-labelledby="timed-auction-tab">
-                              <div class="form-create-tab-wrap">
-                                  <label class="mb-2 form-label">Minimum bid</label>
-                                  <input type="text" class="form-control form-control-s1" placeholder="Enter Minimum bid">
-                                  <div class="row mt-3">
-                                      <div class="col-lg-6">
-                                          <label class="mb-2 form-label">Starting date</label>
-                                          <input type="date" class="form-control form-control-s1">
-                                      </div><!-- end col-lg-6 -->
-                                      <div class="col-lg-6">
-                                          <label class="mb-2 form-label">Expiration date</label>
-                                          <input type="date" class="form-control form-control-s1">
-                                      </div><!-- end col-lg-6 -->
-                                  </div><!-- end row -->
-                              </div><!-- end form-create-tab-wrap -->
-                          </div><!-- end tab-pane -->
-                          <div class="tab-pane fade" id="open-for-bids" role="tabpanel" aria-labelledby="open-for-bids-tab">
-                              <div class="form-create-tab-wrap">
-                                  <label class="mb-2 form-label">Minimum bid</label>
-                                  <input type="text" class="form-control form-control-s1" placeholder="Enter Minimum bid">
-                              </div><!-- end form-create-tab-wrap -->
-                          </div><!-- end tab-pane -->
+
+                        <div class="tab-pane fade show active" id="onetoone" role="tabpanel" aria-labelledby="onetoone-tab">
+                          <div class="form-create-tab-wrap">
+                                <label class="mb-2 form-label">Public Key of Receiver:</label><br>
+                                <span class="item-detail-text-meta">Only this public address will able to view & purchase this property</span>
+                                <input type="text" class="form-control form-control-s1" placeholder="0x123..."
+                                  name="publicKey"
+                                  [(ngModel)]="propertyform.publicKey"
+                                  ng-required="one2one"
+                                  #publicKey="ngModel"
+                                >
+                            </div><!-- end form-create-tab-wrap -->
+                            <span class="item-detail-text-meta text-danger mt-0" *ngIf="publicKey.errors && f.submitted">
+                              Please Add the public key of the receiver
+                            </span>
+                        </div><!-- end tab-pane -->
+
+                        <div class="tab-pane fade show active" id="onetomany" role="tabpanel" aria-labelledby="onetomany-tab">
+                        </div><!-- end tab-pane -->
+
                       </div><!-- end tab-content -->
+
+
                   </div><!-- end form-item -->
-                  <div class="form-item mb-3">
-                      <div class="switch-wrap">
-                          <div class="d-flex align-items-center justify-content-between">
-                              <div class="me-2">
-                                  <h5 class="mb-1">Unlock once purchased</h5>
-                                  <p class="form-text">Content will be unlocked after successful transaction</p>
-                              </div>
-                              <div class="form-check form-switch form-switch-s1">
-                                  <input class="form-check-input checkbox-switcher" data-target="switch-content-unlock" type="checkbox">
-                              </div><!-- end form-check -->
-                          </div><!-- end d-flex -->
-                          <div class="switch-content-unlock mt-4" id="switch-content-unlock">
-                              <input type="text" name="text" class="form-control form-control-s1" placeholder="Access key, code to redeem or link to a file...">
-                          </div>
-                      </div><!-- end switch-wrap -->
-                  </div><!-- end form-item -->
+
+
+
                   <div class="form-item mb-4">
-                      <h5 class="mb-1">Choose collection</h5>
-                      <p class="form-text mb-3">This is the collection where your item will appear.</p>
+                      <h5 class="mb-1">Listing Category</h5>
                       <div class="form-choice-wrap">
-                          <select class="form-choice">
-                              <option selected value="0">Select Collection</option>
-                              <option value="1">Abstraction</option>
-                              <option value="2">Patternlicious</option>
-                              <option value="3">Skecthify</option>
-                              <option value="4">Cartoonism</option>
-                              <option value="5">Virtuland</option>
-                              <option value="6">Papercut</option>
+                          <select class="form-choice" (change)="changeCat($event)">
+                              <option selected value="0">Select your Category</option>
+                              <option  *ngFor="let cat of categories" [ngValue]="cat">{{cat}}</option>
                           </select>
                       </div>
                   </div><!-- end form-item -->
+
+
+
                   <div class="form-item mb-4">
                       <div class="mb-3">
                           <label class="mb-2 form-label">Title</label>
-                          <input type="text" class="form-control form-control-s1" placeholder="e. g. Redeemable T-Shirt with logo">
+                          <input
+                            name="title"
+                            [(ngModel)]="propertyform.title"
+                            required
+                            #title="ngModel"
+                            type="text" class="form-control form-control-s1" placeholder="3 bedroom house in tangier">
+
+                            <span class="item-detail-text-meta text-danger mt-0" *ngIf="title.errors && f.submitted">
+                              Please Add the title of your property
+                            </span>
                       </div>
                       <div class="mb-3">
-                          <label class="mb-2 form-label">Description</label>
-                          <textarea name="message" class="form-control form-control-s1 form-textarea-s1" placeholder="e. g. After purchasing you’ll be able to get the real T-Shirt"></textarea>
+                        <label class="mb-2 form-label">Gov. Title</label>
+                        <input
+                          name="govTitle"
+                          [(ngModel)]="propertyform.govTitle"
+                          required
+                          #govTitle="ngModel"
+                          type="text" class="form-control form-control-s1" placeholder="Governmental title of ownership">
+
+                          <span class="item-detail-text-meta text-danger mt-0" *ngIf="govTitle.errors && f.submitted">
+                            Please Add the Gov. title of your property
+                          </span>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="mb-2 form-label">Description</label><br>
+                        <span class="item-detail-text-meta">Please Include All information to get your listing Approved</span>
+                          <textarea
+                          name="desc"
+                          [(ngModel)]="propertyform.desc"
+                          required
+                          #desc="ngModel"
+                          class="form-control form-control-s1 form-textarea-s1" placeholder="coordinates, Surface, Rooms,Number of floors, etc"></textarea>
+
+                          <span class="item-detail-text-meta text-danger mt-0" *ngIf="desc.errors && f.submitted">
+                            Please Add a detailed description
+                          </span>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="mb-2 form-label">Physical Address</label>
+                        <input
+                          name="physcial_address"
+                          [(ngModel)]="propertyform.physcial_address"
+                          required
+                          #physcial_address="ngModel"
+                          type="text" class="form-control form-control-s1" placeholder="Country, City, Address, coordinates">
+
+                        <span class="item-detail-text-meta text-danger mt-0" *ngIf="physcial_address.errors && f.submitted">
+                          Please Add the Physical Address
+                        </span>
                       </div>
                       <div class="mb-3">
-                          <label class="mb-2 form-label">Royalties</label>
-                          <input type="text" class="form-control form-control-s1" placeholder="e.g 10%">
-                          <p class="form-text mt-1">Suggested: 0, 10%, 20%, 30%. Maximum is 70%</p>
+                          <label class="mb-2 form-label">Price in $</label>
+                          <input
+                          name="priceusd"
+                          [(ngModel)]="propertyform.priceusd"
+                          required
+                          #priceusd="ngModel"
+                          type="text" class="form-control form-control-s1" placeholder="$1533452">
+
+                        <span class="item-detail-text-meta text-danger mt-0" *ngIf="priceusd.errors && f.submitted">
+                          Please Add the Price
+                        </span>
                       </div>
                   </div><!-- end form-item -->
-                  <button class="btn btn-primary" type="button">Create Item</button>
+                  <button class="btn btn-primary" type="submit">Create Item</button>
               </form>
+
+
           </div><!-- endn col -->
       </div><!-- row-->
   </div><!-- container -->

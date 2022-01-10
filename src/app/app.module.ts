@@ -18,6 +18,8 @@ import { UploadPropComponent } from './components/user/upload-prop/upload-prop.c
 import { AnnoncesComponent } from './components/explore/annonces/annonces.component';
 import { DashboardComponent } from './components/user/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { PublicProfileComponent } from './components/user/public-profile/public-profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     UploadPropComponent,
     AnnoncesComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProductDetailsComponent,
+    PublicProfileComponent
 
   ],
   imports: [

@@ -6,6 +6,8 @@ import { RegisterComponent } from './components/user/register/register.component
 import { LoginComponent } from './components/user/login/login.component';
 import { UploadPropComponent } from './components/user/upload-prop/upload-prop.component';
 import { DashboardComponent } from './components/user/dashboard/dashboard.component';
+import { ProductDetailsComponent } from './components/products/product-details/product-details.component';
+import { PublicProfileComponent } from './components/user/public-profile/public-profile.component';
 
 const routes: Routes = [
 
@@ -16,6 +18,8 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
   {path:'dashboard',component:DashboardComponent},
+  {path:'productdetails',component:ProductDetailsComponent},
+  {path:'profile',component:PublicProfileComponent},
 
   {path:'',redirectTo:'home',pathMatch:'full'}
 

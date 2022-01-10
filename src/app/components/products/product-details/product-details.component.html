@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+
+    <section class="item-detail-section section-space" style="margin-top: 80px;">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 pe-xl-5">
+                  <div class="item-detail-content">
+
+                      <div class="item-detail-img-container mb-4">
+                          <img src="assets/images/thumb/house.jpg" alt="" class="w-100 rounded-3">
+                      </div><!-- end item-detail-img-container -->
+
+                  </div><!-- end item-detail-content -->
+              </div><!-- end col -->
+              <div class="col-lg-6">
+                  <div class="item-detail-content mt-4 mt-lg-0">
+                      <h1 class="item-detail-title mb-2">{{title}}</h1>
+                      <div class="item-detail-meta d-flex flex-wrap align-items-center mb-3">
+
+                        <span class="item-detail-text-meta">By<span class="item-detail-text-meta fw-semibold">{{username}}</span></span>
+                          <span class="dot-separeted"></span>
+                          <span class="item-detail-text-meta">${{priceusd}}</span>
+                          <span class="dot-separeted"></span>
+                          <span class="item-detail-text-meta"><span class="text-primary fw-semibold">{{priceeth}} ETH</span></span>
+                          <span class="dot-separeted"></span>
+                          <span class="item-detail-text-meta text-warning fw-semibold">{{type}}</span>
+                          <span class="dot-separeted"></span>
+                          <span class="item-detail-text-meta text-success fw-semibold">Approved</span>
+
+                        </div>
+        <br>
+                      <div class="item-detail-meta d-flex flex-wrap align-items-center mb-3">
+                          <span class="item-detail-text-meta">Property Title </span>
+                          <span class="dot-separeted"></span>
+                          <span class="item-detail-text-meta text-black fw-bold">${{property_id}}</span>
+                      </div>
+<br>
+                      <!-----------Description---------->
+                      <p class="item-detail-text mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa doloremque, harum dicta voluptatibus veritatis, facilis nemo neque iste debitis deleniti similique quas velit temporibus cupiditate. Blanditiis dolores amet quos, deserunt ullam a optio, eius qui dolorem quaerat asperiores! Rerum dolor commodi saepe ratione natus reprehenderit eius!</p>
+
+                      <div class="item-detail-btns mt-4">
+                          <ul class="btns-group d-flex">
+                              <li class="flex-grow-1">
+                                  <a (click)="buyProperty()" class="btn btn-primary d-block">Place a Bid</a>
+                              </li>
+                          </ul>
+                      </div><!-- end item-detail-btns -->
+
+
+                  </div><!-- end item-detail-content -->
+              </div><!-- end col -->
+          </div><!-- end row -->
+      </div><!-- .container -->
+  </section><!-- end item-detail-section -->
