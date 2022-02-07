@@ -12,19 +12,37 @@ import { Web3Service } from 'src/app/service/web3/web3.service';
 export class NavbarComponent implements OnInit {
 
   signedIn!:boolean;
+  isAdmin:boolean=false
+  loggedInWithMask:boolean=false
   user:any;
 
-  constructor(private tokenStorage:TokenService,private userService:UserService,private web3:Web3Service) {
-    this.signedIn=this.tokenStorage.signedIn()
-    this.user=this.tokenStorage.getUser().user
-   }
+  constructor
+  (
+    private tokenStorage:TokenService,
+    private web3:Web3Service
+  )
+  {}
+
 
   ngOnInit(): void {
+
+    //reconnect in case of lost connection
+    this.web3.LoginWithMetaMask();
+
+    //set user to signed in
+    this.signedIn=this.tokenStorage.signedIn()
+
+    //get user data
+    this.user=this.tokenStorage.getUser()
+
+    //admin is logged in
+    if(this.signedIn && this.user.roles[0]=='ROLE_ADMIN') this.isAdmin=true
   }
 
 
   logout(){
     this.tokenStorage.signOut();
+    // window.location.reload();
   }
 
   connectWallet(){

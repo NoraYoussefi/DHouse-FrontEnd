@@ -1,13 +1,15 @@
   <div class="card card-full">
       <a routerLink="/productdetails" class="card-image">
-          <img src="assets/images/thumb/nft-2.jpg" class="card-img-top" alt="art image">
+          <img src="{{image}}" class="card-img-top" alt="art image">
       </a>
       <div class="card-body p-4">
-          <h5 class="card-title text-truncate mb-0"><a routerLink="/productdetails">{{title}}</a></h5>
+          <h5 class="card-title text-truncate mb-0">
+            <a routerLink="/productdetails/{{id}}">{{title}}</a>
+          </h5>
           <div class="card-author mb-1 d-flex align-items-center">
               <span class="me-1 card-author-by">By</span>
               <div class="custom-tooltip-wrap">
-                  <a routerLink="/profile" class="custom-tooltip author-link">{{username}}</a>
+                  <a routerLink="/profile/{{userId}}" class="custom-tooltip author-link">{{username}}</a>
 
               </div><!-- end custom-tooltip-wrap -->
           </div><!-- end card-author -->
@@ -21,6 +23,7 @@
                   <span class="card-price-number">{{priceeth}} ETH</span>
               </div>
           </div><!-- end card-price-wrap -->
-          <a routerLink="/productdetails" class="btn btn-sm btn-primary">Place Bid</a>
+          <a routerLink="/productdetails/{{id}}" class="btn btn-sm btn-primary">Place Bid</a>
       </div><!-- end card-body -->
   </div><!-- end card -->
+

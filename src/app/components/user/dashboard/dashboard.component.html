@@ -1,22 +1,22 @@
 <app-navbar></app-navbar>
+
 <header class="header-section has-header-main">
-  <div class="hero-wrap sub-header" style="background-image: url('images/thumb/bread-bg-2.jpg')">
+  <div class="hero-wrap sub-header" style="background-image: url('https://picsum.photos/1200/200'); height: 100%; ">
     <div class="overlay"></div>
     <div class="container">
         <div class="hero-content py-0 d-flex align-items-center">
             <div class="avatar avatar-3 flex-shrink-0">
-                <img src="assets/images/thumb/avatar.jpg" alt="avatar">
+                <img src="https://i.pravatar.cc/300" alt="{{user.image}}"> <!--src\assets\images\profilecover/imgNumber-->
             </div><!-- end avatar -->
+            
             <div class="author-hero-content-wrap d-flex flex-wrap justify-content-between ms-3 flex-grow-1">
                 <div class="author-hero-content me-3">
-                    <h4 class="hero-author-title mb-1 text-white">Kamran Ahmed</h4>
-                    <p class="hero-author-username mb-1 text-white">@kamran_76</p>
+                    <h4 class="hero-author-title mb-1 text-white">{{user.username}}</h4><!--{{profile.profileUsername}}-->
+                    <p class="hero-author-username mb-1 text-white">{{publicKey}}</p><!--{{profile.profileEmail}}-->
                 </div><!-- end author-hero-content -->
-                <div class="hero-action-wrap d-flex align-items-center my-2">
-                    <a href="account.html" class="btn btn-light">Edit Profile</a>
-                </div>
             </div><!-- end author-hero-content-wrap -->
-        </div><!-- hero-content -->
+        
+          </div><!-- hero-content -->
     </div><!-- .container-->
   </div><!-- end hero-wrap -->
 </header>
@@ -27,65 +27,108 @@
   <div class="container" >
 
     <div class="row">
-          <div class="col-lg-9 ps-xl-5">
-              <div class="user-panel-title-box">
-                  <h3>Enfty Dashboard</h3>
-              </div><!-- end user-panel-title-box -->
-              <div class="profile-setting-panel-wrap">
-                  <ul class="nav nav-tabs nav-tabs-s1 nav-tabs-mobile-size" id="myTab" role="tablist">
-                      <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="offers-receive-tab" data-bs-toggle="tab" data-bs-target="#offers-receive" type="button" role="tab" aria-controls="offers-receive" aria-selected="true"> Listing Sold </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="offers-made-tab" data-bs-toggle="tab" data-bs-target="#offers-made" type="button" role="tab" aria-controls="offers-made" aria-selected="false"> Live Listings </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="transactions-tab" data-bs-toggle="tab" data-bs-target="#transactions" type="button" role="tab" aria-controls="offers-made" aria-selected="false"> Transactions </button>
-                    </li>
-                  </ul>
+            <div class="col-lg-9 ps-xl-5">
+                <div class="user-panel-title-box">
+                    <h3>My Dashboard</h3>
+                </div><!-- end user-panel-title-box -->
 
 
-                  <div class="tab-content mt-4" id="myTabContent">
+
+                <div class="profile-setting-panel-wrap" >
+
+
+                    <ul class="nav nav-tabs nav-tabs-s1 nav-tabs-mobile-size" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="offers-receive-tab" data-bs-toggle="tab" data-bs-target="#offers-receive" type="button" role="tab" aria-controls="offers-receive" aria-selected="true"> Listing Sold </button>
+                        </li>
+
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="offers-made-tab" data-bs-toggle="tab" data-bs-target="#offers-made" type="button" role="tab" aria-controls="offers-made" aria-selected="false"> Live Listings </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="transactions-tab" data-bs-toggle="tab" data-bs-target="#transactions" type="button" role="tab" aria-controls="transactions-aria" aria-selected="false"> Transactions </button>
+                        </li>
+
+
+                    </ul>
+
+
+                    <div class="tab-content mt-4" id="myTabContent">
 
                       <div class="tab-pane fade show active" id="offers-receive" role="tabpanel" aria-labelledby="offers-receive-tab">
-                          <div class="profile-setting-panel">
+                            <div class="profile-setting-panel">
+                                <!--SoldProducts-->
+                                <!------------------------------------->
+                                <div class="row g-gs">
+                                  <div class="col-xl-6" *ngFor="let pr of SoldProducts">
 
-                              <h3 class="mb-1">Live Offers:</h3>
+                                    <app-product
+                                        [image]="pr.images"
+                                        [id]="pr.propertyId"
+                                        [title]="pr.title"
+                                        [govTitle]="pr.govTitle"
+                                        [physcial_address]="pr.physcial_address"
+                                        [priceusd]="pr.priceusd"
+                                        [category]="pr.category"
+                                    >
+                                    </app-product>
+
+                                  </div>
+                                </div>
+
+                                <!------------------------------------->
+
+                            </div><!-- end profile-setting-panel -->
+                      </div>
+
+
+
+
+
+
+                        <div class="tab-pane fade" id="offers-made" role="tabpanel" aria-labelledby="offers-made-tab">
+                            <div class="profile-setting-panel">
+                            <!-- LiveProducts-->
+                                <div class="row g-gs">
+
+                                  <div class="col-xl-6" *ngFor="let pr of LiveProducts">
+
+                                    <app-product
+                                      [image]="pr.images"
+                                      [id]="pr.propertyId"
+                                      [title]="pr.title"
+                                      [govTitle]="pr.govTitle"
+                                      [physcial_address]="pr.physcial_address"
+                                      [priceusd]="pr.priceusd"
+                                      [category]="pr.category"
+                                    >
+                                    </app-product>
+
+                                  </div>
+
+
+
+
+                                </div><!-- end row -->
+                            </div><!-- end profile-setting-panel -->
+                        </div>
+
+
+
+
+
+                        <!----------------------------------------tab 3------------------------------------>
+                        <div class="tab-pane fade" id="transactions" role="tabpanel" aria-labelledby="transactions-aria">
+                          <div class="profile-setting-panel">
 
                               <div class="row g-gs">
 
-                                  <div class="col-xl-6">
-                                      <div class="card card-full">
-                                          <div class="card-body card-body-s1">
-                                              <p class="mb-3 fs-13 mb-4">Offer received 13m ago</p>
-                                              <div class="card-media mb-3">
-                                                  <div class="card-media-img flex-shrink-0">
-                                                      <img src="images/thumb/small-img.jpg" alt="media image">
-                                                  </div><!-- card-media-img -->
-                                                  <div class="card-media-body">
-                                                      <h4><a href="product-details-v1.html">Eternal Zen</a></h4>
-                                                      <p class="fw-medium fs-14">Contact Address</p>
-                                                      <p class="fs-15">08 W 36th St, New York, NY 10001</p>
-                                                  </div><!-- end card-media-body -->
-                                              </div><!-- end card-media -->
-                                              <div class="card-media mb-3">
-                                                  <div class="card-media-body">
-                                                      <span class="fw-medium fs-13">Get Offer</span>
-                                                      <p class="fw-medium text-black fs-14">$1,800.00</p>
-                                                  </div>
-                                                  <div class="card-media-body">
-                                                      <span class="fw-medium fs-13">Payment Methods</span>
-                                                      <p class="fw-medium text-black fs-14">Visa ending in 9720</p>
-                                                  </div>
-                                              </div><!-- end d-flex -->
-                                              <ul class="btns-group">
-                                                  <li><a href="#" class="btn-link flex-grow-1 fw-medium fs-13 text-success">Accept Offer</a></li>
-                                                  <li><a href="#" class="btn-link flex-grow-1 fw-medium fs-13 text-danger">Cancel Offer</a></li>
-                                              </ul>
-                                          </div><!-- end card-body -->
-                                      </div><!-- end card -->
-                                  </div><!-- end col -->
-
+                                <app-transaction
+                                  [transactions]="transactions"
+                                  [userId]="userId"
+                                 >
+                                </app-transaction>
 
                               </div><!-- end row -->
                           </div><!-- end profile-setting-panel -->
@@ -95,104 +138,14 @@
 
 
 
+                    </div><!-- end tab-content -->
 
 
-                      <!--------------------------------Tab 2------------------------------->
-                      <div class="tab-pane fade" id="offers-made" role="tabpanel" aria-labelledby="offers-made-tab">
-                          <div class="profile-setting-panel">
+                </div><!-- end profile-setting-panel-wrap-->
 
 
-                              <h3 class="mb-1">Offers Made</h3>
-                              <div class="row g-gs">
+            </div><!-- end col -->
+    </div><!-- end row -->
 
-
-                                  <div class="col-xl-6">
-                                      <div class="card card-full">
-                                          <div class="card-body card-body-s1">
-                                              <p class="mb-3 fs-13 mb-4">Offer received 13m ago</p>
-                                              <div class="card-media mb-3">
-                                                  <div class="card-media-img flex-shrink-0">
-                                                      <img src="images/thumb/small-img.jpg" alt="media image">
-                                                  </div><!-- card-media-img -->
-                                                  <div class="card-media-body">
-                                                      <h4><a href="product-details-v1.html">Eternal Zen</a></h4>
-                                                      <p class="fw-medium fs-14">Contact Address</p>
-                                                      <p class="fs-15">08 W 36th St, New York, NY 10001</p>
-                                                  </div><!-- end card-media-body -->
-                                              </div><!-- end card-media -->
-                                              <div class="card-media mb-3">
-                                                  <div class="card-media-body">
-                                                      <span class="fw-medium fs-13">Get Offer</span>
-                                                      <p class="fw-medium text-black fs-14">$1,800.00</p>
-                                                  </div>
-                                                  <div class="card-media-body">
-                                                      <span class="fw-medium fs-13">Payment Methods</span>
-                                                      <p class="fw-medium text-black fs-14">Visa ending in 9720</p>
-                                                  </div>
-                                              </div><!-- end d-flex -->
-                                              <ul class="btns-group">
-                                                  <li><span class="badge bg-info">Pending</span></li>
-                                                  <li><a href="#" class="btn-link fw-medium fs-13 text-danger">Cancel Offer</a></li>
-                                              </ul>
-                                          </div><!-- end card-body -->
-                                      </div><!-- end card -->
-                                  </div><!-- end col -->
-
-                              </div><!-- end row -->
-                          </div><!-- end profile-setting-panel -->
-                      </div><!-- end tab-pane -->
-
-
-
-
-
-
-                      <!----------------------------------------tab 3------------------------------------>
-                      <div class="tab-pane fade" id="transactions" role="tabpanel" aria-labelledby="offers-made-tab">
-                        <div class="profile-setting-panel">
-
-                            <h3 class="mb-1">Transactions</h3>
-                            <div class="row g-gs">
-
-                              <table class="table mb-0 table-s2">
-
-                                <thead class="fs-14">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Seller</th>
-                                        <th scope="col">Buyer</th>
-                                        <th scope="col">Property Id</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Price (Eth)</th>
-                                        <th scope="col">Price ($)</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody class="fs-13">
-                                    <tr>
-                                        <th scope="row"><a href="#">4947</a></th>
-                                        <td>me</td>
-                                        <td>0x32b1n3a</td>
-                                        <td>A215614</td>
-                                        <td>Commercial</td>
-                                        <td>120 Eth</td>
-                                        <td>362206.80 $</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                </tbody>
-
-                            </table>
-
-                            </div><!-- end row -->
-                        </div><!-- end profile-setting-panel -->
-                    </div><!-- end tab-pane -->
-
-
-
-
-                  </div><!-- end tab-content -->
-              </div><!-- end profile-setting-panel-wrap-->
-          </div><!-- end col -->
-      </div><!-- end row -->
-  </div><!-- end container -->
+  </div>
 </section><!-- end profile-section -->

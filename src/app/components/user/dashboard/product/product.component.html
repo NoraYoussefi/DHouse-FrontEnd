@@ -1,0 +1,42 @@
+
+      <div class="card card-full">
+
+          <div class="card-body card-body-s1">
+
+              <div class="card-media mb-3">
+
+                <div class="card-media-img flex-shrink-0">
+                    <img src="{{image}}" alt="media image"> <!--Product.image-->
+                </div><!-- card-media-img -->
+
+                <div class="card-media-body">
+                    <h4><a routerLink="/productdetails/{{id}}">{{title}}</a></h4> <!--Product.title-->
+                    <p class="fw-medium fs-14">{{govTitle}}</p>
+                    <p class="fs-15">{{physcial_address}}</p> <!--Product.physicalAddress-->
+                </div><!-- end card-media-body -->
+
+                </div><!-- end card-media -->
+
+
+              <div class="card-media mb-3">
+                  <div class="card-media-body">
+                      <span class="fw-medium fs-13">Price</span>
+                      <p class="fw-medium text-black fs-14">{{priceusd}}</p>
+                  </div>
+                  <div class="card-media-body">
+                      <span class="fw-medium fs-13">Category</span>
+                      <p class="fw-medium text-black fs-14">{{category}}<p>
+                  </div>
+              </div><!-- end d-flex -->
+
+
+              <!--Show if method is one2one-->
+              <ul class="btns-group">
+                  <li><a (click)="DeleteProduct(id)" class="btn-link flex-grow-1 fw-medium fs-13 text-danger" style="cursor: pointer;">Delete</a></li>
+              </ul>
+
+          </div><!-- end card-body -->
+
+      </div><!-- end card -->
+
+

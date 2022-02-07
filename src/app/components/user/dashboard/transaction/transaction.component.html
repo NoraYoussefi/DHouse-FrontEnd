@@ -1,0 +1,55 @@
+<table class="table mb-0 table-s2">
+
+  <thead class="fs-14">
+      <tr>
+          <th scope="col">Seller</th>
+          <th scope="col">Buyer</th>
+          <th scope="col">Property Id</th>
+          <th scope="col">Price (Eth)</th>
+          <th scope="col">Price ($)</th>
+      </tr>
+  </thead>
+
+  <!--transactions-->
+  <tbody class="fs-13" *ngFor="let transaction of transactions"> <!---->
+        <tr>
+
+          <td>
+            <a routerLink="/profile/{{transaction.buyerAddress}}">
+              {{transaction.buyerAddress==userId ? "me" : transaction.buyerAddress}}<!---->
+            </a>
+          </td>
+
+          <td>
+            <a routerLink="/profile/{{transaction.sellerAddress}}">
+              {{transaction.sellerAddress==userId ? "me" : transaction.sellerAddress}}
+            </a>
+          </td> <!---->
+
+          <!-- <td>{{transaction.sellerAddress}}</td> -->
+          <td>
+            {{transaction.propertyId}}
+          </td> <!---->
+
+          <td>
+            120 Eth
+          </td> <!---->
+
+          <td>
+            {{transaction.priceusd}} $
+          </td>
+
+        </tr>
+
+  </tbody>
+
+</table>
+
+<!--
+
+    transactionId!:string;
+  buyerAddress!:string;
+  sellerAddress!:string;
+  propertyId!:number;
+  priceusd!:number;
+-->

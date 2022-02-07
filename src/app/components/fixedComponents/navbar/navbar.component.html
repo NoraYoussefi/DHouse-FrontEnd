@@ -3,13 +3,17 @@
     <div class="container">
         <div class="header-wrap">
 
+
+            <!--logo-->
             <div class="header-logo">
                 <a routerLink="/home" class="logo-link">
                     <img class="logo-dark logo-img" src="assets/images/logo-black.png" alt="logo">
                     <img class="logo-light logo-img" src="assets/images/logo-white.png" alt="logo">
                 </a>
-            </div><!-- .header-logo -->
+            </div>
+            <!-- .header-logo -->
 
+            <!--
               <div class="header-mobile-action">
                   <div class="header-search-mobile dropdown me-2">
                       <a class="icon-btn" href="#" data-bs-toggle="dropdown">
@@ -21,34 +25,40 @@
                               <a href="#" class="btn btn-sm btn-outline-secondary"><em class="ni ni-search"></em></a>
                           </div>
                       </div>
-                  </div><!-- end header-search-mobile -->
+                  </div>
 
                   <div class="header-toggle">
                       <button class="menu-toggler">
                           <em class="menu-on menu-icon ni ni-menu"></em>
                           <em class="menu-off menu-icon ni ni-cross"></em>
                       </button>
-                  </div><!-- .header-toggle -->
-              </div><!-- end header-mobile-action -->
-              <div class="header-search-form">
-                  <input type="search" class="form-control form-control-s1" placeholder="Search item here...">
+                  </div>
               </div>
+
+            -->
+
+          
               <nav class="header-menu menu nav">
                   <ul class="menu-list ms-lg-auto">
 
                     <li *ngIf="signedIn">
-                      <a routerLink="/dashboard" class="menu-link">Dashboard</a>
+                      <a routerLink="/dashboard" *ngIf=!isAdmin  class="menu-link">Dashboard</a>
+                      <a routerLink="/admin" *ngIf=isAdmin class="menu-link">Dashboard</a>
                     </li>
 
                     <li >
                         <a routerLink="/explore" class="menu-link">Explore</a>
                     </li>
-
-                    <li *ngIf="signedIn">
-                      <a  routerLink="" class="menu-link">Profile</a>
+                    <li >
+                      <a routerLink="/aboutus" class="menu-link">About Us</a>
+                    </li>
+                    <li >
+                      <a routerLink="/faq" class="menu-link">FAQ</a>
                     </li>
 
                   </ul>
+
+
                   <ul class="menu-btns">
                     <li *ngIf="!signedIn" ><a routerLink="/register"  class="btn btn-outline-primary" >Sign Up</a></li>
                     <li *ngIf="!signedIn" ><a routerLink="/login" class="btn btn-outline-info" >Log In</a></li>
@@ -60,18 +70,16 @@
                         <button type="button" class="icon-btn icon-btn-s1" data-bs-toggle="dropdown"><em class="ni ni-user"></em></button>
                         <ul class="dropdown-menu card-generic card-generic-s3 dropdown-menu-end mt-2">
                             <li>
-                                <h6 class="dropdown-header">Hello {{user.username}}</h6>
+                                <h6 class="dropdown-header">Hello {{user.username}}</h6><!---->
                             </li>
-                            <li><a class="dropdown-item card-generic-item" href="profile.html"><em class="ni ni-user me-2"></em> Profile</a></li>
-                            <li><a class="dropdown-item card-generic-item" href="offers.html"><em class="ni ni-dashboard me-2"></em> Dashboard</a></li>
-                            <li><a class="dropdown-item card-generic-item" href="account.html"><em class="ni ni-setting me-2"></em> Account Settings</a></li>
+                            <li><a class="dropdown-item card-generic-item" routerLink='/dashboard' ><em class="ni ni-dashboard me-2"></em> Dashboard</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item card-generic-item" (click)="logout()"><em class="ni ni-power me-2"></em> Logout</a></li>
                         </ul>
                     </li>
-                    <li class="d-lg-none"><a href="wallet.html" class="btn btn-lg btn-primary">Connect Wallet</a></li>
+                    <li class="d-lg-none"><button class="btn btn-lg btn-primary">Connect Wallet</button></li>
                 </ul>
               </nav><!-- .header-menu -->
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/service/user/auth.service';
 import { TokenService } from 'src/app/service/user/token.service';
 
@@ -15,18 +16,26 @@ export class LoginComponent implements OnInit {
     password: null
   };
 
+  user!:''
+
 
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenService,private router:Router) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenService,private router:Router) {
+
+  }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
+      console.log("user logged in")
+      this.isLoggedIn = true; //set user to logged in
+      this.roles = this.tokenStorage.getUser().roles; //get user roles
+      this.user=this.tokenStorage.getUser() //get user
+      console.log(this.roles)
+      console.log(this.user)
     }
   }
 
@@ -38,13 +47,14 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       data => {
         console.log(data)
-        this.tokenStorage.saveToken(data.message);
+        this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+
+        window.location.href="/home"
       },
       err => {
         console.log(err)
@@ -54,10 +64,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  reloadPage(): void {
-    this.router.navigateByUrl('/home');
-    // window.location.reload();
-  }
+
+
+
+
+
 
 
 }

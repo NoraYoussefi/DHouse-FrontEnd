@@ -14,7 +14,7 @@ declare let require:any;
 
 export class Web3Service {
 
-  private account: any = null;
+  public account: any = null;
   private web3: any;
   private LoggedInWithMask:boolean=false;
 
@@ -90,6 +90,8 @@ export class Web3Service {
 
       console.log(this.account)
 
+      window.sessionStorage.setItem("publickey", this.account);
+
     }
 
   }
@@ -108,19 +110,116 @@ export class Web3Service {
 
 
   //transfer eth from one account to another
-  async transferEth(etherValue:any){
+  async transferEth(receiver:string,etherValue:string){
 
-      this.web3.eth.sendTransaction({
+    this.web3.eth.sendTransaction({
+      from: this.account,
+      to: receiver, //receiver address
+      value: Web3.utils.toWei(etherValue,"ether"),
+    })
+
+    .on('confirmation', function(){
+      console.log("Eth Sent");
+    })
+
+    .on('error',function(){ console.log("Eth Sent")}); // If a out of gas error, the second parameter is the receipt.
+
+  }
+
+
+
+  //Regsitering a new property ---- method belongs to the ADMIN
+  async RegisterProperty(owner:string,property_title:string){
+
+    this.Contract.methods.registerProperty(owner,property_title)
+    .send(
+      {
         from: this.account,
-        to: '0x522E1AEEbA60bcBAc2B9c324649E529f54ccaC43', //receiver address
-        value: Web3.utils.toWei(etherValue,"ether"),
-      })
-      .on('confirmation', function(){
-        console.log("Eth Sent");
-      })
-      .on('error',function(){ console.log("Eth Sent")}); // If a out of gas error, the second parameter is the receipt.
+        gas: '6721975'
+      }
+    )
+    .then(console.log);
 
-    }
+  }
+
+
+
+
+  //Method called by the buyer
+  async BuyProperty(title:string,etherValue:string,seller:string){
+    console.log(etherValue)
+
+    const buyProp=this.Contract.methods.BuyProperty(title) //ownership of property is changed
+    .send(
+      {
+        from: this.account,
+        gas: '6721975',
+      }
+    )
+
+    console.log(buyProp);
+
+    this.transferEth(seller,etherValue) //transfer funds After changing ownership
+
+  }
+
+
+
+
+  //Verify the ownership -- called when adding a new property
+  async verifyOwner(prop_title:string){
+
+    //(address of the supposed to be the muthufucking owner)
+    const verification=await this.Contract.methods.isOwnerOfProperty(this.account,prop_title)
+
+    .call({
+      from:this.account,
+      gas: '6721975',
+      gasPrice: '20000000',
+      to: contractAddress // contract address
+    })
+
+  //  .then(console.log)
+
+   return verification
+
+  }
+
+
+
+
+  //Verify that the property exists -- called when adding a new property
+  async verifyPropExistance(prop_title:string){
+
+    //(address of the supposed to be the muthufucking owner)
+    const verification=await this.Contract.methods.verifyPropExistance(prop_title)
+
+    .call({
+      from:this.account,
+      gas: '6721975',
+      gasPrice: '20000000',
+      to: contractAddress // contract address
+    })
+
+    return verification
+  }
+
+
+
+
+
+  //get the balance of the current account
+  async getCurrentAccountBalance(){
+    return this.web3.eth.getBalance(this.account);
+  }
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------------
 
 
 
@@ -136,7 +235,7 @@ export class Web3Service {
       }
     )
     .then(
-      this.transferEth(etherValue)
+      this.transferEth("a",etherValue)
     )
 
     console.log(addProp)
@@ -146,7 +245,6 @@ export class Web3Service {
 
 
 
-  //get property by title
   async getPropretyByTitle(title:string){
 
     const getProp=this.Contract.methods.getPropertyByTitle(title).call({
@@ -155,6 +253,7 @@ export class Web3Service {
       gasPrice: '20000000',
       to: contractAddress // contract address
     })
+
     .then(console.log);
 
   }
@@ -193,10 +292,6 @@ export class Web3Service {
 
 
 
-  //get the balance of the current account
-  async getCurrentAccountBalance(){
-    return this.web3.eth.getBalance(this.account);
-  }
 
 
 

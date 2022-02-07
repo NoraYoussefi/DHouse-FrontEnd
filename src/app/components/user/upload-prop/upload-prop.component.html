@@ -1,17 +1,22 @@
 <header class="header-section has-header-main">
   <app-navbar></app-navbar>
 </header>
+
+<div *ngIf=retrievedImage>
+      <img [src]="retrievedImage">
+</div>
+
 <section class="create-section section-space-b pt-70">
   <div class="container">
       <div class="row">
           <div class="col-lg-8 mx-auto">
               <div class="section-head-sm">
-                  <a routerLink="" class="btn-link fw-semibold"><em class="ni ni-arrow-left"></em> Manage collectible type</a>
-                  <h1 class="mt-2">Create single collectible</h1>
+                  <a routerLink="" class="btn-link fw-semibold"><em class="ni ni-arrow-left"></em> Manage collectible type </a>
+                  <h1 class="mt-2">Create Your Listing</h1>
               </div><!-- end section-head -->
 
               <form
-                name="propertyform"
+                name="product"
                 (ngSubmit)="f.form.valid && onSubmit()"
                 #f="ngForm"
                 novalidate
@@ -24,12 +29,12 @@
                       <div class="file-upload-wrap">
                           <p class="file-name mb-4" id="file-name">PNG, JPG, JPEG . Max 100mb.</p>
                           <input id="file-upload"  type="file"
-
+                            accept="image/png, image/jpeg, image/jpg"
                             name="images"
-                            [(ngModel)]="propertyform.images"
                             required
                             #images="ngModel"
-
+                            [(ngModel)]="product.images"
+                            (change)="UploadImage($event)"
                           >
                       </div>
                       <span class="item-detail-text-meta text-danger mt-0" *ngIf="images.errors && f.submitted">
@@ -45,10 +50,12 @@
                     <div class="file-upload-wrap">
                         <p class="file-name mb-4" id="file-name">PDF. Max 100mb.</p>
                         <input id="file-upload"  type="file"
+                            accept="application/pdf"
                             name="legaldocs"
-                            [(ngModel)]="propertyform.legaldocs"
+                            [(ngModel)]="product.legaldocs"
                             required
                             #legaldocs="ngModel"
+                            (change)="UploadPDF($event)"
                           >
                     </div>
                     <span class="item-detail-text-meta text-danger mt-0" *ngIf="legaldocs.errors && f.submitted">
@@ -57,51 +64,27 @@
                 </div><!-- end form-item -->
 
 
+
                   <div class="form-item mb-4">
-                      <h5 class="mb-3">Select Method</h5>
-
-                      <ul class="row g-3 nav nav-tabs nav-tabs-s2" id="myTab" role="tablist">
-
-                        <li class="nav-item col-6 " role="presentation">
-                              <button (click)="setOne2One()" class="nav-link active" id="onetoone-tab" data-bs-toggle="tab" data-bs-target="#onetoone" type="button" role="tab" aria-controls="fixed-price" aria-selected="false">
-                                  <em class="ni ni-tags nav-link-icon"></em>
-                                  <span class="nav-link-title mt-1 d-block">One to One</span>
-                              </button>
-                          </li>
-
-                          <li class="nav-item col-6 " role="presentation">
-                              <button (click)="setOne2Many()" class="nav-link" id="onetomany-tab" data-bs-toggle="tab" data-bs-target="#onetomany" type="button" role="tab" aria-controls="timed-auction" aria-selected="true">
-                                  <em class="ni ni-clock nav-link-icon"></em>
-                                  <span class="nav-link-title mt-1 d-block">One to Many</span>
-                              </button>
-                          </li>
-
-                      </ul>
-
-
-                      <div class="tab-content my-4" id="myTabContent">
 
                         <div class="tab-pane fade show active" id="onetoone" role="tabpanel" aria-labelledby="onetoone-tab">
                           <div class="form-create-tab-wrap">
-                                <label class="mb-2 form-label">Public Key of Receiver:</label><br>
-                                <span class="item-detail-text-meta">Only this public address will able to view & purchase this property</span>
-                                <input type="text" class="form-control form-control-s1" placeholder="0x123..."
+                                <label class="mb-2 form-label">Metamask Public Address:</label><br>
+                                <input type="text" class="form-control form-control-s1" 
+                                  placeholder={{UserPublicAddress}}
                                   name="publicKey"
-                                  [(ngModel)]="propertyform.publicKey"
-                                  ng-required="one2one"
-                                  #publicKey="ngModel"
+                                  disabled
                                 >
                             </div><!-- end form-create-tab-wrap -->
+                          <!--
                             <span class="item-detail-text-meta text-danger mt-0" *ngIf="publicKey.errors && f.submitted">
                               Please Add the public key of the receiver
                             </span>
+                          -->
                         </div><!-- end tab-pane -->
 
                         <div class="tab-pane fade show active" id="onetomany" role="tabpanel" aria-labelledby="onetomany-tab">
                         </div><!-- end tab-pane -->
-
-                      </div><!-- end tab-content -->
-
 
                   </div><!-- end form-item -->
 
@@ -115,7 +98,8 @@
                               <option  *ngFor="let cat of categories" [ngValue]="cat">{{cat}}</option>
                           </select>
                       </div>
-                  </div><!-- end form-item -->
+                  </div>
+                  <!-- end form-item -->
 
 
 
@@ -124,7 +108,7 @@
                           <label class="mb-2 form-label">Title</label>
                           <input
                             name="title"
-                            [(ngModel)]="propertyform.title"
+                            [(ngModel)]="product.title"
                             required
                             #title="ngModel"
                             type="text" class="form-control form-control-s1" placeholder="3 bedroom house in tangier">
@@ -137,7 +121,7 @@
                         <label class="mb-2 form-label">Gov. Title</label>
                         <input
                           name="govTitle"
-                          [(ngModel)]="propertyform.govTitle"
+                          [(ngModel)]="product.govTitle"
                           required
                           #govTitle="ngModel"
                           type="text" class="form-control form-control-s1" placeholder="Governmental title of ownership">
@@ -152,7 +136,7 @@
                         <span class="item-detail-text-meta">Please Include All information to get your listing Approved</span>
                           <textarea
                           name="desc"
-                          [(ngModel)]="propertyform.desc"
+                          [(ngModel)]="product.desc"
                           required
                           #desc="ngModel"
                           class="form-control form-control-s1 form-textarea-s1" placeholder="coordinates, Surface, Rooms,Number of floors, etc"></textarea>
@@ -166,7 +150,7 @@
                         <label class="mb-2 form-label">Physical Address</label>
                         <input
                           name="physcial_address"
-                          [(ngModel)]="propertyform.physcial_address"
+                          [(ngModel)]="product.physcial_address"
                           required
                           #physcial_address="ngModel"
                           type="text" class="form-control form-control-s1" placeholder="Country, City, Address, coordinates">
@@ -179,7 +163,7 @@
                           <label class="mb-2 form-label">Price in $</label>
                           <input
                           name="priceusd"
-                          [(ngModel)]="propertyform.priceusd"
+                          [(ngModel)]="product.priceusd"
                           required
                           #priceusd="ngModel"
                           type="text" class="form-control form-control-s1" placeholder="$1533452">
@@ -191,6 +175,7 @@
                   </div><!-- end form-item -->
                   <button class="btn btn-primary" type="submit">Create Item</button>
               </form>
+
 
 
           </div><!-- endn col -->

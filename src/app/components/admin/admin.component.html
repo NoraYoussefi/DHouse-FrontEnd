@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<header class="header-section has-header-main">
+  <div class="hero-wrap sub-header" style="background-image: url('https://picsum.photos/1200/200')">
+    <div class="overlay"></div>
+    <div class="container" >
+        <div class="hero-content py-0 d-flex align-items-center">
+            <div class="avatar avatar-3 flex-shrink-0">
+                <img src="https://i.pravatar.cc/300" alt="avatar"> <!--{{profile.image}}"-->
+            </div><!-- end avatar -->
+            <div class="author-hero-content-wrap d-flex flex-wrap justify-content-between ms-3 flex-grow-1">
+                <div class="author-hero-content me-3">
+                    <h4 class="hero-author-title mb-1 text-white">ADMIN</h4><!--{{profile.profileUsername}}-->
+                    <p class="hero-author-username mb-1 text-white">{{admin.email}}</p><!--{{profile.profileEmail}}-->
+                  </div><!-- end author-hero-content -->
+               
+            </div><!-- end author-hero-content-wrap -->
+        </div><!-- hero-content -->
+    </div><!-- .container-->
+  </div><!-- end hero-wrap -->
+</header>
+
+
+<section class="profile-section section-space" >
+
+  <div class="container" style="margin-left: 0px;" >
+
+  <div class="row">
+          <div class="col-lg-9 ps-xl-5">
+              <div class="user-panel-title-box">
+                  <h3>Admin Dashboard</h3>
+              </div><!-- end user-panel-title-box -->
+
+
+
+                <div class="row g-gs">
+
+                  <table class="table mb-0 table-s2">
+
+                    <thead class="fs-14">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Images</th>
+                            <th scope="col">Legal Docs</th>
+                            <th scope="col">Seller</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Gov Title</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Price(eth)</th>
+                           <th scope="col">Action</th> <!--Waiting for approval-->
+                        </tr>
+                      </thead>
+                      <tbody class="fs-13"> <!---->
+
+                            <tr *ngFor="let product of nonVerifiedProducts">
+                              <td>{{product.title}}</td> <!---->
+                              <td>
+                                <a target="_blank" href="{{product.images}}">ImagesLink</a>
+                              </td>
+                              <td>
+                                <a target="_blank" href="{{product.legaldocs}}">LegalDocs</a>
+                              </td>
+                              <td>{{product.userId}}</td> <!--product.userId-->
+                              <td>{{product.category}}</td><!---->
+                              <td>{{product.govTitle}}</td> <!---->
+                              <td>{{product.physcial_address}}</td><!---->
+                              <td>120 Eth</td>
+                              <td>{{product.priceusd}} $</td> <!---->
+                              <td>
+                                
+                                <button
+                                  type="button" class="btn btn-danger"
+                                  (click)="Reject(product.propertyId)"
+                                >
+                                  Reject
+                                </button>
+
+                                <br>
+                                <button
+                                  type="button" class="btn btn-success"
+                                  (click)="validate(product.propertyId,product.publicKey,product.govTitle)"
+                                >
+                                  Approve
+                                </button>
+
+                              </td>
+                            </tr>
+
+                      </tbody>
+
+
+                  </table>
+
+                </div><!-- end row -->
+
+
+          </div><!-- end col -->
+      </div><!-- end row -->
+  </div><!-- end container -->
+</section><!-- end profile-section -->

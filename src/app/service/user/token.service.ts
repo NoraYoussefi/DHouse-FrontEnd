@@ -12,14 +12,15 @@ export class TokenService {
 
   signOut(): void {
     window.sessionStorage.clear();
-
-    window.location.reload();
-
-    this.route.navigateByUrl('/home');
+    window.location.href="/home"
   }
 
   signedIn(){
     return this.getToken()!=undefined ? true : false;
+  }
+
+  signedInAsAdmin(){
+    return this.signedIn() && this.getUser().roles[0]=='ROLE_ADMIN' ? true : false;
   }
 
   public saveToken(token: string): void {
@@ -41,7 +42,6 @@ export class TokenService {
     if (user) {
       return JSON.parse(user);
     }
-
     return {};
   }
 }

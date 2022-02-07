@@ -7,7 +7,7 @@
               <h1 class="hero-title">Explore</h1>
               <nav aria-label="breadcrumb">
                   <ol class="breadcrumb breadcrumb-s1 justify-content-center mt-3 mb-0">
-                      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
                       <li class="breadcrumb-item active" aria-current="page">Explore</li>
                   </ol>
               </nav>
@@ -19,46 +19,25 @@
   <section class="explore-section pt-lg-4">
 
     <div class="container">
-          <div class="filter-box">
-              <h3 class="mb-4">Filter by</h3>
-              <div class="button-group filter-button-group">
-                  <button class="button is-checked" data-filter="*">All</button>
-                  <button class="button" data-filter=".artworks">Artworks</button>
-                  <button class="button" data-filter=".music">Music</button>
-                  <button class="button" data-filter=".collectibles">Collectibles</button>
-                  <button class="button" data-filter=".games">Games</button>
-              </div>
-          </div><!-- end filter-box -->
 
 
           <div class="gap-2x"></div><!-- end gap -->
 
           <div class="filter-container row g-gs">
-              <div class="col-xl-3 col-lg-4 col-sm-6 filter-item artworks">
+              <div class="col-xl-3 col-lg-4 col-sm-6 filter-item artworks" *ngFor="let pr of products" >
 
-                <app-products-card></app-products-card>
-
-              </div><!-- end col -->
-              <div class="col-xl-3 col-lg-4 col-sm-6 filter-item artworks">
-
-                <app-products-card></app-products-card>
-
-              </div><!-- end col -->
-              <div class="col-xl-3 col-lg-4 col-sm-6 filter-item artworks">
-
-                <app-products-card></app-products-card>
+                <app-products-card
+                  [image]="pr.images"
+                  [userId]="pr.userId"
+                  [id]="pr.propertyId"
+                  [priceusd]="pr.priceusd"
+                  [priceeth]="priceeth*pr.priceusd"
+                  [username]="user.username"
+                  [title]="pr.title"
+                ></app-products-card>
 
               </div><!-- end col -->
-              <div class="col-xl-3 col-lg-4 col-sm-6 filter-item artworks">
 
-                <app-products-card></app-products-card>
-
-              </div><!-- end col -->
-              <div class="col-xl-3 col-lg-4 col-sm-6 filter-item music">
-
-                <app-products-card></app-products-card>
-
-              </div><!-- end col -->
           </div><!-- end filter-container -->
 
       </div><!-- .container -->

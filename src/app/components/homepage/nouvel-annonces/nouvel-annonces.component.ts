@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/Product';
+import { ProductService } from 'src/app/service/product/product.service';
 
 @Component({
   selector: 'app-nouvel-annonces',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NouvelAnnoncesComponent implements OnInit {
 
-  constructor() { }
+  newAnnonces!:Product[]
+  priceeth="9999"
+  constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
+    this.getNewAnnonces()
   }
+
+
+  public getNewAnnonces(){
+    this.productService.getExploreProducts().subscribe(
+      data=>{
+        this.newAnnonces=data.slice(0,4);
+      });
+  }
+
+
 
 }

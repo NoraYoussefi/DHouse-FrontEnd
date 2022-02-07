@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/service/user/auth.service';
 
 @Component({
@@ -8,30 +9,40 @@ import { AuthService } from 'src/app/service/user/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  form: any = {
-    username: null,
-    email: null,
-    password: null
-  };
+
+  public user:User=new User()
+
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+  ){ }
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
 
-    console.log("__________FORM__________")
-    console.log(this.form)
 
-    this.authService.register(username, email, password).subscribe(
+    //set role to normal user
+    // this.user.role=0;
+    console.log(this.user)
+
+    this.authService.register(
+
+      this.user.username,
+      this.user.email,
+      this.user.password,
+
+    ).subscribe(
       data => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+
+        window.location.href="/home"
+
       },
       err => {
         console.log(err);
@@ -39,7 +50,12 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     );
+
+
+
+
     }
+
 
 }
 

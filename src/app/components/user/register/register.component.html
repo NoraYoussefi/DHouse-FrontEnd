@@ -15,7 +15,7 @@
                   </div>
                   <form
                     *ngIf="!isSuccessful"
-                    name="form"
+                    name="user"
                     (ngSubmit)="f.form.valid && onSubmit()"
                     #f="ngForm"
                     novalidate
@@ -28,7 +28,7 @@
                             placeholder="Username"
                             type="text"
                             name="username"
-                            [(ngModel)]="form.username"
+                            [(ngModel)]="user.username"
                             required
                             minlength="3"
                             maxlength="20"
@@ -57,7 +57,7 @@
                             type="email"
                             class="form-control"
                             name="email"
-                            [(ngModel)]="form.email"
+                            [(ngModel)]="user.email"
                             required
                             email
                             #email="ngModel"
@@ -81,7 +81,7 @@
                             placeholder="Password"
                             type="password"
                             name="password"
-                            [(ngModel)]="form.password"
+                            [(ngModel)]="user.password"
                             required
                             minlength="6"
                             #password="ngModel"
